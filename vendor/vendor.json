@@ -3,6 +3,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "4nhXt+svWtwsjFzQMbBywcykuEo=",
+			"path": "github.com/shopspring/decimal",
+			"revision": "9ca7f51822d222ae4e246f070f9aad863599bd1a",
+			"revisionTime": "2017-11-08T22:52:54Z"
+		},
+		{
 			"checksumSHA1": "iN//qSunKGImecnRCcQrGTFgJMk=",
 			"path": "golang.org/x/net/publicsuffix",
 			"revision": "d866cfc389cec985d6fda2859936a575a55a3ab6",
