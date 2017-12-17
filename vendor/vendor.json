@@ -1,6 +1,19 @@
 {
 	"comment": "",
 	"ignore": "test",
-	"package": [],
+	"package": [
+		{
+			"checksumSHA1": "iN//qSunKGImecnRCcQrGTFgJMk=",
+			"path": "golang.org/x/net/publicsuffix",
+			"revision": "d866cfc389cec985d6fda2859936a575a55a3ab6",
+			"revisionTime": "2017-12-11T20:45:21Z"
+		},
+		{
+			"checksumSHA1": "CW9VE8SAAjoS/GcJA6yDFBNUUik=",
+			"path": "gopkg.in/resty.v1",
+			"revision": "9ac9c42358f7c3c69ac9f8610e8790d7c338e85d",
+			"revisionTime": "2017-09-25T19:29:30Z"
+		}
+	],
 	"rootPath": "github.com/lxmx/go-scoro"
 }
