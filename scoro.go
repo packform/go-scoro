@@ -7,12 +7,20 @@
 // View/List/Modify/Delete actions which are directly mapped to the
 // corresponding API calls.
 //
-// Products service
+// Products service:
 //
 //    products := scoro.Products(credentials)
 //
-// Quotes service
+// Quotes service:
 //
-//    quote := scoro.Quotes(credentials)
+//    quotes := scoro.Quotes(credentials)
+//
+// Orders service:
+//
+//    orders := scoro.Orders(credentials)
+//
+// Invoices service:
+//
+//    invoices := scoro.Invoices(credentials)
 //
 package scoro

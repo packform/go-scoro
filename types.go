@@ -1,13 +1,23 @@
 package scoro
 
+// Implementation for marshaling and unmarshaling of common data types used in the API
+
 import (
 	"encoding/json"
 	"strings"
 	"time"
 )
 
+// TimePattern represents time format used in Scoro API requests and responses
 const TimePattern = `"2006-01-02 15:04:05"`
 
+// Time type provides the implementation of JSON time serialization into Scoro API format.
+//
+// Notes
+//
+// 	- format is YYYY-MM-DD hh:mm:ss
+// 	- null value is supported
+// 	- "0000-00-00 00:00:00" is considered as null
 type Time struct {
 	time.Time `json:",inline"`
 }
@@ -35,6 +45,9 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 	return err
 }
 
+// Bool type provides the implementation of serialization boolean values into Scoro API format.
+// True -> "1" and False -> "0" mappings are used to serialize boolean values to into request JSON.
+// Both boolean and "0"/"1" values are supported in response.
 type Bool struct {
 	Value bool `json:",inlline"`
 }
@@ -66,12 +79,22 @@ func (t *Bool) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// Localized strings, or single string in requested language
-
+// Strings provides support for string fields with localization support. Scoro
+// expects strings as localied dictionaries for some fields in request. However,
+// it can return them as localized dictionary as single string (in requested lang) for
+// the same fields in response. Marshal/Unmarshal implementations for this
+// type handle both cases appropriately.
+//
+// Examples:
+//
+// 		field := scoro.MakeStrings("Some string", scoro.DefaultLang)
+// 		field := scoro.MakeStrings("Привет", "rus")
 type Strings struct {
 	Values map[string]string `json:",inline"`
 }
 
+// MakeStrings is helper method that creates strings for single language, it
+// can be convinient if you don't need localization for multiple languages.
 func MakeStrings(str string, lang string) Strings {
 	values := make(map[string]string)
 	values[lang] = str
