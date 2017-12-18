@@ -7,6 +7,8 @@ import (
 	"github.com/shopspring/decimal"
 )
 
+// QuoteLine struct represents quote lines data type of Scoro API.
+// https://api.scoro.com/api/#quoteLinesApiDocs
 type QuoteLine struct {
 	ProductID int             `json:"product_id"`
 	UnitPrice decimal.Decimal `json:"price"`
@@ -15,6 +17,8 @@ type QuoteLine struct {
 	Vat       decimal.Decimal `json:"vat"`
 }
 
+// Quote struct represents quotes data type of Scoro API.
+// https://api.scoro.com/api/#quotesApiDocs
 type Quote struct {
 	Id                       *int              `json:"id,omitempty"`
 	No                       string            `json:"no,omitempty"`
@@ -42,9 +46,10 @@ type Quote struct {
 	IsDeleted                Bool              `json:"is_deleted"`
 	DeletedDate              Time              `json:"deleted_date,omitempty"`
 }
-
 type QuoteList []Quote
 
+// QuotesAPI provides type safe wrappers for View/List/Modify/Delete actions
+// of quotes API
 type QuotesAPI struct {
 	credentials Credentials
 }

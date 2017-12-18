@@ -7,6 +7,8 @@ import (
 	"github.com/shopspring/decimal"
 )
 
+// Product struct represents products data type of Scoro API.
+// https://api.scoro.com/api/#productsApiDocs
 type Product struct {
 	Id                *int              `json:"product_id,omitempty"`
 	Code              string            `json:"code,omitempty"`
@@ -31,6 +33,8 @@ type Product struct {
 }
 type ProductList []Product
 
+// ProductsAPI provides type safe wrappers for View/List/Modify/Delete actions
+// of products API
 type ProductsAPI struct {
 	credentials Credentials
 }
