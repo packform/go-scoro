@@ -15,6 +15,7 @@ type QuoteLine struct {
 	Amount    decimal.Decimal `json:"amount"`
 	Sum       decimal.Decimal `json:"sum"`
 	Vat       decimal.Decimal `json:"vat"`
+	Comment   Strings         `json:"comment"`
 }
 
 // Quote struct represents quotes data type of Scoro API.
