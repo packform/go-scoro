@@ -16,7 +16,7 @@ type Request struct {
 	entityType  string
 }
 
-type Response struct {
+type ResponseHeader struct {
 	Status     string `json:"status"`
 	StatusCode string `json:"statusCode"`
 	Messages   *struct {
@@ -25,7 +25,7 @@ type Response struct {
 }
 
 type ResponseType interface {
-	GetResponse() Response
+	GetResponseHeader() ResponseHeader
 }
 
 func NewRequest(credentials Credentials, entityType string) Request {
@@ -117,20 +117,21 @@ func unmarshalResponse(restyResp *resty.Response) (interface{}, error) {
 		return nil, errors.New("Error status: " + restyResp.Status())
 	}
 
-	if _, ok := restyResp.Result().(ResponseType); !ok {
+	response, validFormat := restyResp.Result().(ResponseType)
+	if !validFormat {
 		return nil, errors.New("Invalid format")
 	}
 
-	response := restyResp.Result().(ResponseType).GetResponse()
+	header := response.GetResponseHeader()
 
-	if response.Status == "OK" {
-		return restyResp.Result(), nil
+	if header.Status == "OK" {
+		return response, nil
 	}
 
-	if response.Messages != nil {
-		errStr := strings.Join(response.Messages.Error, "; ")
+	if header.Messages != nil {
+		errStr := strings.Join(header.Messages.Error, "; ")
 		return nil, errors.New(errStr)
 	}
 
-	return nil, errors.New("Error: " + response.StatusCode)
+	return nil, errors.New("Error: " + header.StatusCode)
 }

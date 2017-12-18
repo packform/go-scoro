@@ -96,19 +96,19 @@ func (t ProductsAPI) Request() Request {
 // Private
 
 type productResponse struct {
-	Response `json:",inline"`
-	Product  Product `json:"data,omitempty"`
+	ResponseHeader `json:",inline"`
+	Product        Product `json:"data,omitempty"`
 }
 
 type productListResponse struct {
-	Response `json:",inline"`
-	Products ProductList `json:"data,omitempty"`
+	ResponseHeader `json:",inline"`
+	Products       ProductList `json:"data,omitempty"`
 }
 
-func (t productResponse) GetResponse() Response {
-	return t.Response
+func (t productResponse) GetResponseHeader() ResponseHeader {
+	return t.ResponseHeader
 }
 
-func (t productListResponse) GetResponse() Response {
-	return t.Response
+func (t productListResponse) GetResponseHeader() ResponseHeader {
+	return t.ResponseHeader
 }

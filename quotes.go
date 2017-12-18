@@ -110,19 +110,19 @@ func (t QuotesAPI) Request() Request {
 // Private
 
 type quoteResponse struct {
-	Response `json:",inline"`
-	Quote    Quote `json:"data,omitempty"`
+	ResponseHeader `json:",inline"`
+	Quote          Quote `json:"data,omitempty"`
 }
 
 type quoteListResponse struct {
-	Response `json:",inline"`
-	Quotes   QuoteList `json:"data,omitempty"`
+	ResponseHeader `json:",inline"`
+	Quotes         QuoteList `json:"data,omitempty"`
 }
 
-func (t quoteResponse) GetResponse() Response {
-	return t.Response
+func (t quoteResponse) GetResponseHeader() ResponseHeader {
+	return t.ResponseHeader
 }
 
-func (t quoteListResponse) GetResponse() Response {
-	return t.Response
+func (t quoteListResponse) GetResponseHeader() ResponseHeader {
+	return t.ResponseHeader
 }
