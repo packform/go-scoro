@@ -2,7 +2,6 @@ package scoro
 
 import (
 	"errors"
-	"strconv"
 
 	"github.com/shopspring/decimal"
 )
@@ -38,8 +37,8 @@ type Order struct {
 	ProjectID                int               `json:"project_id,omitempty"`
 	Currency                 string            `json:"currency,omitempty"`
 	OwnerID                  int               `json:"owner_id,omitempty"`
-	Date										 Time							 `json:"date,omitempty"`
-	Deadline								 Time							 `json:"deadline,omitempty"`
+	Date                     Time              `json:"date,omitempty"`
+	Deadline                 Time              `json:"deadline,omitempty"`
 	Status                   string            `json:"status,omitempty"`
 	Description              string            `json:"description,omitempty"`
 	IsSent                   Bool              `json:"is_sent"`
@@ -104,9 +103,7 @@ func (t OrdersAPI) Modify(product Order) (*Order, error) {
 }
 
 func (t OrdersAPI) Delete(id int) error {
-	_, err := t.Request().SetResponse(orderResponse{}).Delete(map[string]string{
-		"id": strconv.Itoa(id),
-	})
+	_, err := t.Request().SetResponse(orderResponse{}).Delete(id, nil)
 
 	return err
 }

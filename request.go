@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 
 	resty "gopkg.in/resty.v1"
@@ -108,8 +109,8 @@ func (t Request) Modify(obj interface{}) (interface{}, error) {
 }
 
 // Delete method sends "delete" action request
-func (t Request) Delete(filter interface{}) (interface{}, error) {
-	url := makeUrl(t.credentials.CompanyID, t.entityType, "delete")
+func (t Request) Delete(id int, filter interface{}) (interface{}, error) {
+	url := makeUrl(t.credentials.CompanyID, t.entityType, "delete", strconv.Itoa(id))
 	body := requestBody{Credentials: t.credentials, Lang: t.lang, Request: filter}
 
 	return sendRequest(url, body, t.respType)

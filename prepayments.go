@@ -2,7 +2,6 @@ package scoro
 
 import (
 	"errors"
-	"strconv"
 
 	"github.com/shopspring/decimal"
 )
@@ -109,10 +108,7 @@ func (t PrepaymentsAPI) Modify(product Prepayment) (*Prepayment, error) {
 }
 
 func (t PrepaymentsAPI) Delete(id int) error {
-	_, err := t.Request().SetResponse(prepaymentResponse{}).Delete(map[string]string{
-		"id": strconv.Itoa(id),
-	})
-
+	_, err := t.Request().SetResponse(prepaymentResponse{}).Delete(id, nil)
 	return err
 }
 
