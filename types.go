@@ -11,7 +11,12 @@ import (
 // TimePattern represents time format used in Scoro API requests and responses
 const TimePattern = `"2006-01-02 15:04:05"`
 
-// Time type provides the implementation of JSON time serialization into Scoro API format.
+// DatePattern represents time format used in Scoro API requests and responses
+const DatePattern = `"2006-01-02"`
+
+const NullStr = "null"
+
+// Time type provides the implementation of JSON date/time serialization into Scoro API format.
 //
 // Notes
 //
@@ -31,7 +36,7 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 	timeStr := string(data)
 
 	// Ignore null, like in the main JSON package.
-	if timeStr == "null" {
+	if timeStr == NullStr {
 		return nil
 	}
 
@@ -42,6 +47,40 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 
 	var err error
 	t.Time, err = time.Parse(TimePattern, timeStr)
+	return err
+}
+
+// Date type provides the implementation of JSON date serialization into Scoro API format.
+//
+// Notes
+//
+// 	- format is YYYY-MM-DD
+// 	- null value is supported
+// 	- "0000-00-00" is considered as null
+type Date struct {
+	time.Time `json:",inline"`
+}
+
+func (t Date) MarshalJSON() ([]byte, error) {
+	timeStr := t.Time.Format(DatePattern)
+	return []byte(timeStr), nil
+}
+
+func (t *Date) UnmarshalJSON(data []byte) error {
+	timeStr := string(data)
+
+	// Ignore null, like in the main JSON package.
+	if timeStr == NullStr {
+		return nil
+	}
+
+	// We consider "0000-00-00 00:00:00" as nil.
+	if timeStr == `"0000-00-00"` {
+		return nil
+	}
+
+	var err error
+	t.Time, err = time.Parse(DatePattern, timeStr)
 	return err
 }
 
