@@ -2,7 +2,6 @@ package scoro
 
 import (
 	"errors"
-	"strconv"
 )
 
 // Contact struct represents contacts data type of Scoro API.
@@ -14,7 +13,7 @@ type Contact struct {
 	ContactType    string            `json:"contact_type,omitempty"`
 	IdCode         string            `json:"id_code,omitempty"`
 	BankAccount    string            `json:"bankaccount,omitempty"`
-	Birthday       Time              `json:"birthday,omitempty"`
+	Birthday       Date              `json:"birthday,omitempty"`
 	Position       string            `json:"position,omitempty"`
 	Comments       string            `json:"comments,omitempty"`
 	Sex            string            `json:"sex,omitempty"`
@@ -104,9 +103,7 @@ func (t ContactsAPI) Modify(product Contact) (*Contact, error) {
 }
 
 func (t ContactsAPI) Delete(id int) error {
-	_, err := t.Request().SetResponse(contactResponse{}).Delete(map[string]string{
-		"id": strconv.Itoa(id),
-	})
+	_, err := t.Request().SetResponse(contactResponse{}).Delete(id, nil)
 
 	return err
 }
