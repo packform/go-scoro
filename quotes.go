@@ -36,6 +36,8 @@ type Quote struct {
 	ProjectID                int               `json:"project_id,omitempty"`
 	Currency                 string            `json:"currency,omitempty"`
 	OwnerID                  int               `json:"owner_id,omitempty"`
+	Date                     Time              `json:"date,omitempty"`
+	Deadline                 Time              `json:"deadline,omitempty"`
 	Status                   string            `json:"status,omitempty"`
 	Description              string            `json:"description,omitempty"`
 	IsSent                   Bool              `json:"is_sent"`
