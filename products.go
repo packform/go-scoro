@@ -2,8 +2,6 @@ package scoro
 
 import (
 	"errors"
-
-	"github.com/shopspring/decimal"
 )
 
 // Product struct represents products data type of Scoro API.
@@ -13,8 +11,8 @@ type Product struct {
 	Code              string            `json:"code,omitempty"`
 	Name              string            `json:"name,omitempty"`
 	Names             Strings           `json:"names,omitempty"`
-	Price             decimal.Decimal   `json:"price,omitempty"`
-	BuyingPrice       decimal.Decimal   `json:"buying_price,omitempty"`
+	Price             Decimal           `json:"price,omitempty"`
+	BuyingPrice       Decimal           `json:"buying_price,omitempty"`
 	Description       Strings           `json:"description,omitempty"`
 	Description2      Strings           `json:"description2,omitempty"`
 	Tag               string            `json:"tag,omitempty"`

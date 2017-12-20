@@ -2,19 +2,17 @@ package scoro
 
 import (
 	"errors"
-
-	"github.com/shopspring/decimal"
 )
 
 // OrderLine struct represents order lines data type of Scoro API.
 // https://api.scoro.com/api/#orderLinesApiDocs
 type OrderLine struct {
-	ProductID int             `json:"product_id"`
-	UnitPrice decimal.Decimal `json:"price"`
-	Amount    decimal.Decimal `json:"amount"`
-	Sum       decimal.Decimal `json:"sum"`
-	Vat       decimal.Decimal `json:"vat"`
-	Comment   Strings         `json:"comment"`
+	ProductID int     `json:"product_id"`
+	UnitPrice Decimal `json:"price"`
+	Amount    Decimal `json:"amount"`
+	Sum       Decimal `json:"sum"`
+	Vat       Decimal `json:"vat"`
+	Comment   Strings `json:"comment"`
 }
 
 // Order struct represents orders data type of Scoro API.
@@ -26,9 +24,9 @@ type Order struct {
 	Discount                 float32           `json:"discount,omitempty"`
 	Discount2                float32           `json:"discount2,omitempty"`
 	Discount3                float32           `json:"discount3,omitempty"`
-	Sum                      decimal.Decimal   `json:"sum,omitempty"`
-	VatSum                   decimal.Decimal   `json:"vat_sum,omitempty"`
-	Vat                      decimal.Decimal   `json:"vat,omitempty"`
+	Sum                      Decimal           `json:"sum,omitempty"`
+	VatSum                   Decimal           `json:"vat_sum,omitempty"`
+	Vat                      Decimal           `json:"vat,omitempty"`
 	CompanyID                int               `json:"company_id,omitempty"`
 	PersonID                 int               `json:"person_id,omitempty"`
 	CompanyAddressID         int               `json:"company_address_id,omitempty"`

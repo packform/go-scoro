@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"strings"
 	"time"
+
+	"github.com/shopspring/decimal"
 )
 
 // TimePattern represents time format used in Scoro API requests and responses
@@ -162,4 +164,50 @@ func (t *Strings) UnmarshalJSON(data []byte) error {
 	}
 
 	return json.Unmarshal(data, t.Values)
+}
+
+// DecimalLike is interface for numeric values that can be represented as decimal
+type DecimalLike interface {
+	IntPart() int64
+	Exponent() int32
+}
+
+// Decimal is custom representation of decimal values to avoid using types from
+// 3rd part libraries in exported methods.
+type Decimal struct {
+	val decimal.Decimal
+}
+
+func NewDecimal(intPart int64, exponent int32) Decimal {
+	return Decimal{
+		val: decimal.New(intPart, exponent),
+	}
+}
+
+func CopyDecimal(val DecimalLike) Decimal {
+	return Decimal{
+		val: decimal.New(val.IntPart(), val.Exponent()),
+	}
+}
+
+func NewDecimalFromFloat(val float64) Decimal {
+	return Decimal{
+		val: decimal.NewFromFloat(val),
+	}
+}
+
+func (t Decimal) IntPart() int64 {
+	return t.IntPart()
+}
+
+func (t Decimal) Exponent() int32 {
+	return t.Exponent()
+}
+
+func (t Decimal) MarshalJSON() ([]byte, error) {
+	return json.Marshal(t.val)
+}
+
+func (t *Decimal) UnmarshalJSON(data []byte) error {
+	return json.Unmarshal(data, &t.val)
 }
