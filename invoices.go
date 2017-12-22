@@ -23,6 +23,7 @@ type Invoice struct {
 	Fine                     string            `json:"fine,omitempty"`
 	QuoteID                  int               `json:"quote_id"`
 	OrderID                  int               `json:"order_id"`
+	PrepaymentPercent        float32           `json:"prepayment_percent,omitempty"`
 	PrepaymentSum            float32           `json:"prepayment_sum,omitempty"`
 	ReferenceNo              string            `json:"reference_no,omitempty"`
 	No                       string            `json:"no,omitempty"`
@@ -57,10 +58,26 @@ type InvoiceList []Invoice
 // of invoices API
 type InvoicesAPI struct {
 	credentials Credentials
+	module      string
 }
 
+// InvoicesAPI provides type safe wrappers for View/List/Modify/Delete actions
+// of invoices API
 func Invoices(credentials Credentials) InvoicesAPI {
-	return InvoicesAPI{credentials}
+	return InvoicesAPI{
+		credentials: credentials,
+		module:      "invoices",
+	}
+}
+
+// InvoicesAPI provides type safe wrappers for View/List/Modify/Delete actions
+// of prepayments API
+// https://api.scoro.com/api/#prepaymentsApiDocs
+func PrepaymentInvoices(credentials Credentials) InvoicesAPI {
+	return InvoicesAPI{
+		credentials: credentials,
+		module:      "invoices/prepayments",
+	}
 }
 
 func (t InvoicesAPI) View(id string) (*Invoice, error) {
@@ -112,7 +129,7 @@ func (t InvoicesAPI) Delete(id int) error {
 }
 
 func (t InvoicesAPI) Request() Request {
-	return NewRequest(t.credentials, "invoices")
+	return NewRequest(t.credentials, t.module)
 }
 
 // Private
