@@ -150,6 +150,10 @@ func (t Strings) MarshalJSON() ([]byte, error) {
 func (t *Strings) UnmarshalJSON(data []byte) error {
 	str := string(data)
 
+	if str == "null" {
+		return nil
+	}
+
 	t.Values = make(map[string]string)
 
 	// Handle single string
