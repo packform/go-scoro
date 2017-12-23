@@ -24,7 +24,7 @@ type Invoice struct {
 	QuoteID                  int               `json:"quote_id"`
 	OrderID                  int               `json:"order_id"`
 	PrepaymentPercent        float32           `json:"prepayment_percent,omitempty"`
-	PrepaymentSum            float32           `json:"prepayment_sum,omitempty"`
+	PrepaymentSum            Decimal           `json:"prepayment_sum,omitempty"`
 	ReferenceNo              string            `json:"reference_no,omitempty"`
 	No                       string            `json:"no,omitempty"`
 	Discount                 float32           `json:"discount,omitempty"`
