@@ -61,7 +61,7 @@ func createQuote(credentials scoro.Credentials, product scoro.Product) scoro.Quo
 		Lines: []scoro.QuoteLine{
 			scoro.QuoteLine{
 				Amount:    scoro.NewDecimalFromFloat(100.12),
-				Comment:   scoro.MakeStrings("Test comment", scoro.DefaultLang),
+				Comment:   "Test comment",
 				ProductID: *product.Id,
 				Sum:       scoro.NewDecimalFromFloat(1001.2),
 				UnitPrice: scoro.NewDecimalFromFloat(10),
