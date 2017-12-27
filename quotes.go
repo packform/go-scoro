@@ -13,7 +13,7 @@ type QuoteLine struct {
 	Comment2        Strings           `json:"comment2"`
 	UnitPrice       Decimal           `json:"price"`
 	Amount          Decimal           `json:"amount"`
-	Amount2         Decimal           `json:"amount"`
+	Amount2         Decimal           `json:"amount2"`
 	Discount        Decimal           `json:"discount"`
 	Sum             Decimal           `json:"sum"`
 	Vat             Decimal           `json:"vat"`
