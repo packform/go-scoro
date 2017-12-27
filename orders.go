@@ -14,7 +14,7 @@ type OrderLine struct {
 	UnitPrice       Decimal           `json:"price"`
 	Amount          Decimal           `json:"amount"`
 	Amount2         Decimal           `json:"amount"`
-	Discount        float32           `json:"discount"`
+	Discount        Decimal           `json:"discount"`
 	Sum             Decimal           `json:"sum"`
 	Vat             Decimal           `json:"vat"`
 	Unit            string            `json:"unit"`
