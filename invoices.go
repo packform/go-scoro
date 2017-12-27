@@ -7,12 +7,21 @@ import (
 // InvoiceLine struct represents invoice lines data type of Scoro API.
 // https://api.scoro.com/api/#invoiceLinesApiDocs
 type InvoiceLine struct {
-	ProductID int     `json:"product_id"`
-	UnitPrice Decimal `json:"price"`
-	Amount    Decimal `json:"amount"`
-	Sum       Decimal `json:"sum"`
-	Vat       Decimal `json:"vat"`
-	Comment   Strings `json:"comment"`
+	Id              int               `json:"id"`
+	ProductID       int               `json:"product_id"`
+	Comment         Strings           `json:"comment"`
+	Comment2        Strings           `json:"comment2"`
+	UnitPrice       Decimal           `json:"price"`
+	Amount          Decimal           `json:"amount"`
+	Amount2         Decimal           `json:"amount"`
+	Discount        float32           `json:"discount"`
+	Sum             Decimal           `json:"sum"`
+	Vat             Decimal           `json:"vat"`
+	Unit            string            `json:"unit"`
+	FinanceObjectID int               `json:"finance_object_id"`
+	Cost            Decimal           `json:"cost"`
+	ProjectID       int               `json:"project_id"`
+	CustomFields    map[string]string `json:"custom_fields,omitempty"`
 }
 
 // Invoice struct represents invoices data type of Scoro API.
