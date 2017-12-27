@@ -9,8 +9,8 @@ import (
 type InvoiceLine struct {
 	Id              int               `json:"id"`
 	ProductID       int               `json:"product_id"`
-	Comment         Strings           `json:"comment"`
-	Comment2        Strings           `json:"comment2"`
+	Comment         string            `json:"comment"`
+	Comment2        string            `json:"comment2"`
 	UnitPrice       Decimal           `json:"price"`
 	Amount          Decimal           `json:"amount"`
 	Amount2         Decimal           `json:"amount2"`
