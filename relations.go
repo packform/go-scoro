@@ -12,7 +12,7 @@ type Relation struct {
 	// RelatedObjects is map containing related objects ID-s for each type on
 	// list request and list of ID-s on modify/delete request.
 	RelatedObjects interface{} `json:"related_objects,omitempty"`
-	Type           string      `json:"type	String,omitempty"`
+	Type           string      `json:"type,omitempty"`
 }
 type RelationList []Relation
 
