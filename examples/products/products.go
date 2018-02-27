@@ -11,15 +11,16 @@ import (
 
 func main() {
 	company := flag.String("company", "", "Company id")
+	subdomain := flag.String("subdomain", "", "Subdomain id")
 	apiKey := flag.String("api_key", "", "Scoro API key")
 	flag.Parse()
 
-	if *company == "" || *apiKey == "" {
-		fmt.Println("Please specify company and api_key")
+	if *company == "" || *apiKey == "" || *subdomain == "" {
+		fmt.Println("Please specify company, api_key and subdomain")
 		return
 	}
 
-	credentials := scoro.Credentials{ApiKey: *apiKey, CompanyID: *company}
+	credentials := scoro.Credentials{ApiKey: *apiKey, CompanyID: *company, Subdomain: *subdomain}
 
 	fmt.Println("List products: ")
 	listProducts(credentials)
