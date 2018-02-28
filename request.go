@@ -80,7 +80,7 @@ func (t Request) SetResponse(response ResponseType) Request {
 
 // View method sends "view" action request
 func (t Request) View(id string) (interface{}, error) {
-	url := makeUrl(t.credentials.CompanyID, t.entityType, "view", id)
+	url := makeUrl(t.credentials.Subdomain, t.entityType, "view", id)
 	body := requestBody{Credentials: t.credentials, Lang: t.lang}
 
 	return sendRequest(url, body, t.respType)
@@ -88,7 +88,7 @@ func (t Request) View(id string) (interface{}, error) {
 
 // List method sends "list" action request
 func (t Request) List(filter interface{}, page int, count int) (interface{}, error) {
-	url := makeUrl(t.credentials.CompanyID, t.entityType, "list")
+	url := makeUrl(t.credentials.Subdomain, t.entityType, "list")
 	body := requestBody{
 		Credentials: t.credentials,
 		Lang:        t.lang,
@@ -102,7 +102,7 @@ func (t Request) List(filter interface{}, page int, count int) (interface{}, err
 
 // Modify method sends "modify" action request
 func (t Request) Modify(obj interface{}) (interface{}, error) {
-	url := makeUrl(t.credentials.CompanyID, t.entityType, "modify")
+	url := makeUrl(t.credentials.Subdomain, t.entityType, "modify")
 	body := requestBody{Credentials: t.credentials, Lang: t.lang, Request: obj}
 
 	return sendRequest(url, body, t.respType)
@@ -110,7 +110,7 @@ func (t Request) Modify(obj interface{}) (interface{}, error) {
 
 // Delete method sends "delete" action request
 func (t Request) Delete(id int, filter interface{}) (interface{}, error) {
-	url := makeUrl(t.credentials.CompanyID, t.entityType, "delete", strconv.Itoa(id))
+	url := makeUrl(t.credentials.Subdomain, t.entityType, "delete", strconv.Itoa(id))
 	body := requestBody{Credentials: t.credentials, Lang: t.lang, Request: filter}
 
 	return sendRequest(url, body, t.respType)
@@ -127,8 +127,8 @@ type requestBody struct {
 	Filter      interface{} `json:"filter,omitempty"`
 }
 
-func makeUrl(companyId string, entityType string, action string, params ...string) string {
-	baseURL := fmt.Sprintf("https://%v.scoro.com/api/v1", companyId)
+func makeUrl(subdomain string, entityType string, action string, params ...string) string {
+	baseURL := fmt.Sprintf("https://%v.scoro.com/api/v1", subdomain)
 
 	urlParts := []string{baseURL, entityType, action}
 	urlParts = append(urlParts, params...)
